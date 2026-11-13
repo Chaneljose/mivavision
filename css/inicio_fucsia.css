@@ -1,0 +1,85 @@
+/* CSS Document */
+
+body {
+  padding-top: 50px;
+  /*color:#6b0c6e;*/
+  color:#484858;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.navbar {
+  background-color: #6b0c6e;
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse .navbar-brand:hover {
+  color: #a132a5;
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+  color: #ffffff;
+  background-color: #a132a5;
+  /*color: #6b0c6e;*/
+}
+.navbar-inverse .navbar-nav > .active > a {
+  color: #fff;
+  background-color: #a132a5;
+}
+.navbar-inverse .navbar-nav > .active > a:hover{
+  color: #fff;
+  background-color: #a132a5;
+}
+/*.navbar-inverse .navbar-nav > .active > a:focus{
+  color: #fff;
+  background-color: #6b0c6e;
+}*/
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #a132a5;
+}
+.nav-sidebar > .active > a:hover {
+  color: #fff;
+  background-color: #6b0c6e;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #a132a5;
+  border-color: #6b0c6e;
+  border-top-color: rgb(107, 12, 110);
+  border-right-color: rgb(107, 12, 110);
+  border-bottom-color: rgb(107, 12, 110);
+  border-left-color: rgb(107, 12, 110);
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #6b0c6e;
+}
+a {
+  color: #a132a5;
+  text-decoration: none;
+}
+a:hover {
+  /*color: #000000;*/
+  color: #7e296b;
+  text-decoration: none;
+}
+.btn-link {
+  font-weight: normal;
+  color: #6b0c6e;
+  cursor: pointer;
+  border-radius: 0;
+}
+.ui-autocomplete-input{
+  line-height: 16px;
+  width: 500px;
+}
+.ui-button-icon-only { 
+  width: 2.3em; 
+  height: 2.0em;
+  padding: 0px 14px 6px; 
+}

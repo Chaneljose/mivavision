@@ -1,0 +1,19 @@
+{
+    "editor.fontSize": 12,
+    "diffEditor.hideUnchangedRegions.minimumLineCount": 1,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.cursorWidth": 0,
+    "editor.tabSize": 2,
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingComments": "always",
+    "editor.defaultFormatter": "Sophisticode.php-formatter",
+    "editor.scrollBeyondLastColumn": 4,
+    "editor.stickyScroll.maxLineCount": 5,
+    "editor.trimAutoWhitespace": false,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    }
+}

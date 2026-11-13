@@ -1,0 +1,83 @@
+/* CSS Document */
+
+body {
+  padding-top: 50px;
+  color:#484858;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.navbar {
+  background-color: #FF8904;
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse .navbar-brand:hover {
+  color: #FFB35C;
+}
+.navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+  color: #ffffff;
+  background-color: #FFB35C;
+  /*color: #FF8904;*/
+}
+.navbar-inverse .navbar-nav > .active > a {
+  color: #fff;
+  background-color: #FFB35C;
+}
+.navbar-inverse .navbar-nav > .active > a:hover{
+  color: #fff;
+  background-color: #FFB35C;
+}
+/*.navbar-inverse .navbar-nav > .active > a:focus{
+  color: #fff;
+  background-color: #FF8904;
+}*/
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #FFB35C;
+}
+.nav-sidebar > .active > a:hover {
+  color: #fff;
+  background-color: #FF8904;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #FFB35C;
+  border-color: #FF8904;
+  border-top-color: rgb(255, 137, 4);
+  border-right-color: rgb(255, 137, 4);
+  border-bottom-color: rgb(255, 137, 4);
+  border-left-color: rgb(255, 137, 4);
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #FF8904;
+}
+a {
+  color: #FF8904;
+  text-decoration: none;
+}
+a:hover {
+  color: #FF8904;
+  text-decoration: none;
+}
+.btn-link {
+  font-weight: normal;
+  color: #FF8904;
+  cursor: pointer;
+  border-radius: 0;
+}
+.ui-autocomplete-input{
+  line-height: 16px;
+  width: 500px;
+}
+.ui-button-icon-only { 
+  width: 2.3em; 
+  height: 2.0em;
+  padding: 0px 14px 6px; 
+}

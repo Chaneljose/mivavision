@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <!--<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="Iconos/favicon.ico">
+    <title>SISMAROL</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ingreso.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <form class="form-signin" role="form" method="post" action="Sesion/Acceso.php">
+        <h2 class="form-signin-heading">INICIAR SESIÓN</h2>
+        <input type="text" class="form-control" name="USR" placeholder="USUARIO" onchange="this.value = this.value.toUpperCase();" required autofocus>
+        <input type="password" class="form-control" name="PSWR" placeholder="CLAVE" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me" id="recordarme"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">INGRESAR</button>
+      </form>
+    </div>
+  </body>
+</html>
