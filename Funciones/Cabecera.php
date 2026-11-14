@@ -46,6 +46,10 @@ function head1(String $titulo)
         <script src="../js/busqueda.js"></script>
         <script src="../js/js_autocompletar.js"></script>
         <script src="../js/js_calendario.js"></script>
+        <script language=javascript>
+            alert("EL COLOR ES: ".$color)
+            self.location = "../index.html"
+        </script>';
 
     </head>
 <?PHP
