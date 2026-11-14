@@ -3,7 +3,7 @@ require_once('../cnx/cnx_compras.php');
 require_once('../Funciones/Cabecera.php');
 require_once('../Funciones/Funciones.php');
 require_once('../Definiciones/Titulo.php');
-session_start();
+//session_start();
 $var_tipo = '';
 $var_active = '';
 if (isset($_SESSION['SES_TIPO'])) {
