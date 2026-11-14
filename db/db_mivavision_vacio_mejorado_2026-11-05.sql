@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `compra_aux` (
   `FECHA_CADUCIDAD` date DEFAULT NULL,
   `ID_ARTICULO` int(11) NOT NULL,
   `ID_USR` int(11) NOT NULL,
-  PRIMARY KEY (`ID_COMPRA_AUX`,`ID_ARTICULO`),
+  PRIMARY KEY (`ID_COMPRA_AUX`),
   UNIQUE KEY `ID_ARTICULO` (`ID_ARTICULO`),
   KEY `ID_USR` (`ID_USR`)
 );
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `devolucion` (
   `ID_COMPRA` int(11) NOT NULL,
   `ID_ARTICULO` int(11) NOT NULL,
   `ID_SOLICITUD_DEV` int(11) NOT NULL,
-  PRIMARY KEY (`ID_DEVOLUCION`,`ID_ALMACEN`,`ID_COMPRA`,`ID_ARTICULO`,`ID_SOLICITUD_DEV`),
+  PRIMARY KEY (`ID_DEVOLUCION`),
   FOREIGN KEY (`ID_ALMACEN`) REFERENCES `almacen` (`ID_ALMACEN`),
   FOREIGN KEY (`ID_COMPRA`) REFERENCES `compra` (`ID_COMPRA`),
   FOREIGN KEY (`ID_ARTICULO`) REFERENCES `articulo` (`ID_ARTICULO`),
@@ -369,13 +369,13 @@ CREATE TABLE IF NOT EXISTS `solicitud_venta` (
 
 -- Volcando estructura para vista mivavision.stock
 -- Creando tabla temporal para superar errores de dependencia de VIEW
-CREATE TABLE `stock` (
+/*CREATE TABLE IF NOT EXISTS `stock` (
 	`ID_ARTICULO` INT(11) NOT NULL,
 	`SALDO` DECIMAL(55,0) NULL,
-	`ARTICULO` VARCHAR(1) NOT NULL COLLATE 'latin1_swedish_ci',
-	`NOMBRE_BUSQUEDA` VARCHAR(1) NOT NULL COLLATE 'latin1_swedish_ci',
-	`NOMBRE_VENTA` VARCHAR(1) NULL COLLATE 'latin1_swedish_ci'
-);
+	`ARTICULO` VARCHAR(1) NOT NULL,
+	`NOMBRE_BUSQUEDA` VARCHAR(1) NOT NULL,
+	`NOMBRE_VENTA` VARCHAR(1) NULL
+);*/
 
 -- Volcando estructura para tabla mivavision.tipo_cliente
 CREATE TABLE IF NOT EXISTS `tipo_cliente` (
@@ -427,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `usr` (
   `FECHA_NAC` date NOT NULL,
   `CI` varchar(50) NOT NULL,
   `ID_TIPO_USR` int(11) NOT NULL,
-  PRIMARY KEY (`ID_USR`,`ID_TIPO_USR`),
+  PRIMARY KEY (`ID_USR`),
   UNIQUE KEY `USR` (`USR`),
   FOREIGN KEY (`ID_TIPO_USR`) REFERENCES `tipo_usr` (`ID_TIPO_USR`)
 );
@@ -501,7 +501,7 @@ CREATE TABLE IF NOT EXISTS `venta_aux` (
   `ID_TIPO_VENTA` varchar(10) NOT NULL,
   `CI_TACHO_CLIENTE` varchar(50) DEFAULT NULL,
   `NOMBRE_CLIENTE` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`ID_VENTA_AUX`,`ID_CLIENTE`,`ID_ARTICULO`),
+  PRIMARY KEY (`ID_VENTA_AUX`),
   UNIQUE KEY `ID_ARTICULO` (`ID_ARTICULO`),
   FOREIGN KEY (`ID_USR`) REFERENCES `usr` (`ID_USR`),
   FOREIGN KEY (`ID_ALMACEN`) REFERENCES `almacen` (`ID_ALMACEN`),
@@ -524,7 +524,7 @@ CREATE TABLE IF NOT EXISTS `venta_credito` (
   `ID_ALMACEN` int(11) NOT NULL,
   `ID_COMPRA` int(11) NOT NULL,
   `ID_ARTICULO` int(11) NOT NULL,
-  PRIMARY KEY (`ID_VENTA_CREDITO`,`ID_SOLICITUD_VENTA`,`ID_CLIENTE`,`ID_ALMACEN`,`ID_COMPRA`,`ID_ARTICULO`),
+  PRIMARY KEY (`ID_VENTA_CREDITO`),
   FOREIGN KEY (`ID_ALMACEN`) REFERENCES `almacen` (`ID_ALMACEN`),
   FOREIGN KEY (`ID_COMPRA`) REFERENCES `compra` (`ID_COMPRA`),
   FOREIGN KEY (`ID_ARTICULO`) REFERENCES `articulo` (`ID_ARTICULO`),
@@ -560,7 +560,7 @@ INSERT INTO bitacora_precio( ID_ARTICULO
 						   	   , 'INSERTADO'
 						   	   , NOW()
 									);
-END//
+END$$
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
@@ -590,7 +590,7 @@ INSERT INTO bitacora_precio( ID_ARTICULO
 						   	   , 'ACTUALIZADO'
 						   	   , NOW()
 									);
-END//
+END$$
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
@@ -605,12 +605,12 @@ SET @total=0;
 UPDATE almacen a
 SET a.SALDO = (@total:= (@total + a.ENTRADA) - a.SALIDA)
 WHERE a.ID_ARTICULO = NEW.ID_ARTICULO;
-END//
+END$$
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 -- Eliminando tabla temporal y crear estructura final de VIEW
-DROP TABLE IF EXISTS `stock`;
+/*DROP TABLE IF EXISTS `stock`;*/
 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `stock` AS select `r`.`ID_ARTICULO` AS `ID_ARTICULO`,`r`.`SALDO` AS `SALDO`,`r`.`ARTICULO` AS `ARTICULO`,`r`.`NOMBRE_BUSQUEDA` AS `NOMBRE_BUSQUEDA`,concat(`r`.`NOMBRE_BUSQUEDA`,' ==> ',`r`.`SALDO`) AS `NOMBRE_VENTA` from (select `m`.`ID_ARTICULO` AS `ID_ARTICULO`,`m`.`COMPRAS` AS `COMPRAS`,`m`.`VENTAS` AS `VENTAS`,(`m`.`COMPRAS` - `m`.`VENTAS`) AS `SALDO`,`m`.`ARTICULO` AS `ARTICULO`,`m`.`NOMBRE_BUSQUEDA` AS `NOMBRE_BUSQUEDA` from (select `z`.`id_articulo` AS `ID_ARTICULO`,sum(`z`.`COMPRAS`) AS `COMPRAS`,sum(`z`.`VENTAS`) AS `VENTAS`,`z`.`ARTICULO` AS `ARTICULO`,`z`.`nombre_busqueda` AS `NOMBRE_BUSQUEDA` from (select `c`.`ID_ARTICULO` AS `id_articulo`,sum(`c`.`CANTIDAD`) AS `COMPRAS`,0 AS `VENTAS`,`a`.`ARTICULO` AS `ARTICULO`,`a`.`NOMBRE_BUSQUEDA` AS `nombre_busqueda` from (`compra` `c` join `articulo` `a` on((`c`.`ID_ARTICULO` = `a`.`ID_ARTICULO`))) group by `c`.`ID_ARTICULO` union all select `v`.`ID_ARTICULO` AS `ID_ARTICULO`,0 AS `COMPRAS`,sum(`v`.`CANTIDAD`) AS `VENTAS`,`a`.`ARTICULO` AS `ARTICULO`,`a`.`NOMBRE_BUSQUEDA` AS `NOMBRE_BUSQUEDA` from (`venta` `v` join `articulo` `a` on((`v`.`ID_ARTICULO` = `a`.`ID_ARTICULO`))) group by `v`.`ID_ARTICULO` union all select `a`.`ID_ARTICULO` AS `ID_ARTICULO`,0 AS `COMPRAS`,0 AS `VENTAS`,`a`.`ARTICULO` AS `ARTICULO`,`a`.`NOMBRE_BUSQUEDA` AS `NOMBRE_BUSQUEDA` from `articulo` `a` group by `a`.`ID_ARTICULO`) `z` group by `z`.`id_articulo`,`z`.`ARTICULO`,`z`.`nombre_busqueda`) `m`) `r` order by `r`.`ID_ARTICULO` 
 ;
 
