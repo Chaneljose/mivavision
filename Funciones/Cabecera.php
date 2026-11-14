@@ -1,6 +1,9 @@
 <?PHP
 require_once('../cnx/cnx_compras.php');
 require_once('../Definiciones/Titulo.php');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $sql = "SELECT e.TEMA FROM empresa e";
 $query = $connect->prepare($sql);
 $query->execute();
