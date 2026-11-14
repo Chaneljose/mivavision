@@ -22,7 +22,7 @@ if ($query->rowCount() > 0) {
     $nombre_empresa = $result->NOMBRE_EMPRESA;
   }
 }
-
+/* comentario para actualizar*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
