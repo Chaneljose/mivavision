@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para sismarol
-CREATE DATABASE IF NOT EXISTS `sismarol` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `sismarol`;
+-- Volcando estructura de base de datos para mivavision
+CREATE DATABASE IF NOT EXISTS `mivavision` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `mivavision`;
 
--- Volcando estructura para tabla sismarol.almacen
+-- Volcando estructura para tabla mivavision.almacen
 CREATE TABLE IF NOT EXISTS `almacen` (
   `ID_ALMACEN` int(11) NOT NULL AUTO_INCREMENT,
   `ENTRADA` int(11) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
   PRIMARY KEY (`ID_ALMACEN`,`ID_COMPRA`,`ID_ARTICULO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1722 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.almacen: ~1,136 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.almacen: ~1,136 rows (aproximadamente)
 INSERT INTO `almacen` (`ID_ALMACEN`, `ENTRADA`, `SALIDA`, `SALDO`, `ID_COMPRA`, `ID_ARTICULO`) VALUES
 	(1, 100, 0, 100, 1, 1),
 	(2, 1, 0, 1, 2, 2),
@@ -1754,7 +1754,7 @@ INSERT INTO `almacen` (`ID_ALMACEN`, `ENTRADA`, `SALIDA`, `SALDO`, `ID_COMPRA`, 
 	(1720, 40, 0, 70, 1720, 842),
 	(1721, 1, 0, 3, 1721, 647);
 
--- Volcando estructura para tabla sismarol.articulo
+-- Volcando estructura para tabla mivavision.articulo
 CREATE TABLE IF NOT EXISTS `articulo` (
   `ID_ARTICULO` int(11) NOT NULL AUTO_INCREMENT,
   `BARCODE` varchar(250) NOT NULL,
@@ -1776,7 +1776,7 @@ CREATE TABLE IF NOT EXISTS `articulo` (
   CONSTRAINT `Refunidad33` FOREIGN KEY (`ID_UNIDAD`) REFERENCES `unidad` (`ID_UNIDAD`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1616 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.articulo: ~1,458 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.articulo: ~1,458 rows (aproximadamente)
 INSERT INTO `articulo` (`ID_ARTICULO`, `BARCODE`, `ARTCODE`, `ARTICULO`, `NOMBRE_BUSQUEDA`, `DESCRIPCION`, `PRECIO_COMPRA`, `PRECIO_VENTA`, `ID_MARCA`, `ID_GRUPO`, `ID_UNIDAD`) VALUES
 	(1, '', 'ABENDROTH00001', 'NOXPIRIN PLUS X 100 CAPS', 'NOXPIRIN PLUS X 100 CAPS (ABENDROTH)', '', 2.5, 2.5, 1, 'MED', 'UN'),
 	(2, '', 'ALCOS00001', 'ALCODERM CREMA x 10 GR', 'ALCODERM CREMA x 10 GR (ALCOS)', '', 25, 28, 2, 'MED', 'UN'),
@@ -3391,7 +3391,7 @@ INSERT INTO `articulo` (`ID_ARTICULO`, `BARCODE`, `ARTCODE`, `ARTICULO`, `NOMBRE
 	(1614, '', 'LAFAR00028', 'CIPROFAR 500 MG X 200 COMP', 'CIPROFAR 500 MG X 200 COMP (LAFAR)', '', 1.78, 2.5, 48, 'MED', 'UN'),
 	(1615, '', 'LAFAR00029', 'ULPRAZOL RAPID POLVO X 30 SOBRES', 'ULPRAZOL RAPID POLVO X 30 SOBRES (LAFAR)', '', 6.5, 8, 48, 'MED', 'UN');
 
--- Volcando estructura para tabla sismarol.baja
+-- Volcando estructura para tabla mivavision.baja
 CREATE TABLE IF NOT EXISTS `baja` (
   `ID_BAJA` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -3412,9 +3412,9 @@ CREATE TABLE IF NOT EXISTS `baja` (
   CONSTRAINT `Refsolicitud_baja54` FOREIGN KEY (`ID_SOLICITUD_BAJA`) REFERENCES `solicitud_baja` (`ID_SOLICITUD_BAJA`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.baja: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.baja: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.bitacora_precio
+-- Volcando estructura para tabla mivavision.bitacora_precio
 CREATE TABLE IF NOT EXISTS `bitacora_precio` (
   `ID_BITACORA_PRECIO` int(11) NOT NULL AUTO_INCREMENT,
   `ID_ARTICULO` int(11) NOT NULL,
@@ -3430,7 +3430,7 @@ CREATE TABLE IF NOT EXISTS `bitacora_precio` (
   PRIMARY KEY (`ID_BITACORA_PRECIO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3441 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.bitacora_precio: ~3,014 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.bitacora_precio: ~3,014 rows (aproximadamente)
 INSERT INTO `bitacora_precio` (`ID_BITACORA_PRECIO`, `ID_ARTICULO`, `ARTICULO`, `DESCRIPCION`, `PRECIO_COMPRA`, `PRECIO_VENTA`, `ID_MARCA`, `ID_GRUPO`, `ID_UNIDAD`, `ESTADO`, `FECHA_REGISTRO`) VALUES
 	(1, 1, 'NOXPIRIN PLUS X 100 CAPS', '', 0, 2.5, 1, 'MED', 'UN', 'INSERTADO', '2024-05-31 09:55:05'),
 	(2, 2, 'ALCODERM CREMA x 10 GR', '', 0, 25, 2, 'MED', 'UN', 'INSERTADO', '2024-05-31 09:55:05'),
@@ -6873,7 +6873,7 @@ INSERT INTO `bitacora_precio` (`ID_BITACORA_PRECIO`, `ID_ARTICULO`, `ARTICULO`, 
 	(3439, 1615, 'ULPRAZOL RAPID POLVO X 30 SOBRES', '', 6.5, 8, 48, 'MED', 'UN', 'INSERTADO', '2024-11-19 11:36:17'),
 	(3440, 1359, 'GLUCOSAMIN B12 x 36 SOBRES ', '', 5, 5.5, 100, 'MED', 'UN', 'ACTUALIZADO', '2024-11-19 20:59:01');
 
--- Volcando estructura para tabla sismarol.cliente
+-- Volcando estructura para tabla mivavision.cliente
 CREATE TABLE IF NOT EXISTS `cliente` (
   `ID_CLIENTE` int(11) NOT NULL AUTO_INCREMENT,
   `TACHO` int(11) NOT NULL,
@@ -6887,11 +6887,11 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   CONSTRAINT `Reftipo_cliente17` FOREIGN KEY (`ID_TIPO_CLIENTE`) REFERENCES `tipo_cliente` (`ID_TIPO_CLIENTE`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.cliente: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.cliente: ~0 rows (aproximadamente)
 INSERT INTO `cliente` (`ID_CLIENTE`, `TACHO`, `CI`, `NOMBRE`, `APATERNO`, `AMATERNO`, `ID_TIPO_CLIENTE`) VALUES
 	(1, 1, '1', 'VENTAS CONTADO', '', '', 'NS');
 
--- Volcando estructura para tabla sismarol.cobro_credito
+-- Volcando estructura para tabla mivavision.cobro_credito
 CREATE TABLE IF NOT EXISTS `cobro_credito` (
   `ID_COBRO_CREDITO` varchar(10) NOT NULL,
   `TOTAL_VENTA` double NOT NULL,
@@ -6908,9 +6908,9 @@ CREATE TABLE IF NOT EXISTS `cobro_credito` (
   CONSTRAINT `Refventa_credito62` FOREIGN KEY (`ID_VENTA_CREDITO`, `ID_SOLICITUD_VENTA`, `ID_CLIENTE`, `ID_ALMACEN`, `ID_COMPRA`, `ID_ARTICULO`) REFERENCES `venta_credito` (`ID_VENTA_CREDITO`, `ID_SOLICITUD_VENTA`, `ID_CLIENTE`, `ID_ALMACEN`, `ID_COMPRA`, `ID_ARTICULO`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.cobro_credito: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.cobro_credito: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.compra
+-- Volcando estructura para tabla mivavision.compra
 CREATE TABLE IF NOT EXISTS `compra` (
   `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_FACTURA` int(11) NOT NULL,
@@ -6930,7 +6930,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   CONSTRAINT `Refarticulo26` FOREIGN KEY (`ID_ARTICULO`) REFERENCES `articulo` (`ID_ARTICULO`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1722 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.compra: ~1,136 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.compra: ~1,136 rows (aproximadamente)
 INSERT INTO `compra` (`ID_COMPRA`, `NRO_FACTURA`, `FECHA_FACTURA`, `CANTIDAD`, `PRECIO_FACTURA`, `UM_IMPUESTO`, `VALOR`, `ICE`, `DESCUENTO`, `TOTAL`, `FECHA_CADUCIDAD`, `FECHA_REGISTRO`, `ID_ARTICULO`) VALUES
 	(1, 1, '2024-05-31', 100, 2.5, 0, 250, 0, 0, 250, '2025-05-31', '2024-05-31 10:01:21', 1),
 	(2, 1, '2024-05-31', 1, 25, 0, 25, 0, 0, 25, '2025-05-31', '2024-05-31 10:01:21', 2),
@@ -8654,7 +8654,7 @@ INSERT INTO `compra` (`ID_COMPRA`, `NRO_FACTURA`, `FECHA_FACTURA`, `CANTIDAD`, `
 	(1720, 120, '2024-11-20', 40, 1.46, 0, 58.4, 0, 0, 58.4, '2026-11-01', '2024-11-20 20:28:50', 842),
 	(1721, 120, '2024-11-20', 1, 40, 0, 40, 0, 0, 40, '2025-11-01', '2024-11-20 20:28:50', 647);
 
--- Volcando estructura para tabla sismarol.deposito
+-- Volcando estructura para tabla mivavision.deposito
 CREATE TABLE IF NOT EXISTS `deposito` (
   `ID_DEPOSITO` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_DEPOSITO` date NOT NULL,
@@ -8667,9 +8667,9 @@ CREATE TABLE IF NOT EXISTS `deposito` (
   PRIMARY KEY (`ID_DEPOSITO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.deposito: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.deposito: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.devolucion
+-- Volcando estructura para tabla mivavision.devolucion
 CREATE TABLE IF NOT EXISTS `devolucion` (
   `ID_DEVOLUCION` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_DEVOLUCION` char(10) DEFAULT NULL,
@@ -8690,15 +8690,15 @@ CREATE TABLE IF NOT EXISTS `devolucion` (
   CONSTRAINT `Refsolicitud_dev57` FOREIGN KEY (`ID_SOLICITUD_DEV`) REFERENCES `solicitud_dev` (`ID_SOLICITUD_DEV`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.devolucion: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.devolucion: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.gestion
+-- Volcando estructura para tabla mivavision.gestion
 CREATE TABLE IF NOT EXISTS `gestion` (
   `ID_GESTION` int(11) NOT NULL,
   PRIMARY KEY (`ID_GESTION`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.gestion: ~17 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.gestion: ~17 rows (aproximadamente)
 INSERT INTO `gestion` (`ID_GESTION`) VALUES
 	(2024),
 	(2025),
@@ -8718,19 +8718,19 @@ INSERT INTO `gestion` (`ID_GESTION`) VALUES
 	(2039),
 	(2040);
 
--- Volcando estructura para tabla sismarol.grupo
+-- Volcando estructura para tabla mivavision.grupo
 CREATE TABLE IF NOT EXISTS `grupo` (
   `ID_GRUPO` varchar(10) NOT NULL,
   `GRUPO` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_GRUPO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.grupo: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.grupo: ~2 rows (aproximadamente)
 INSERT INTO `grupo` (`ID_GRUPO`, `GRUPO`) VALUES
 	('COS', 'COSMETICO'),
 	('MED', 'MEDICAMENTO');
 
--- Volcando estructura para tabla sismarol.kardex
+-- Volcando estructura para tabla mivavision.kardex
 CREATE TABLE IF NOT EXISTS `kardex` (
   `ID_KARDEX` int(11) NOT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
@@ -8753,16 +8753,16 @@ CREATE TABLE IF NOT EXISTS `kardex` (
   CONSTRAINT `Reftipo_venta60` FOREIGN KEY (`ID_TIPO_VENTA`) REFERENCES `tipo_venta` (`ID_TIPO_VENTA`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.kardex: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.kardex: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.marca
+-- Volcando estructura para tabla mivavision.marca
 CREATE TABLE IF NOT EXISTS `marca` (
   `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT,
   `MARCA` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_MARCA`)
 ) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.marca: ~102 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.marca: ~102 rows (aproximadamente)
 INSERT INTO `marca` (`ID_MARCA`, `MARCA`) VALUES
 	(1, 'ABENDROTH'),
 	(2, 'ALCOS'),
@@ -8870,14 +8870,14 @@ INSERT INTO `marca` (`ID_MARCA`, `MARCA`) VALUES
 	(105, 'MATRIX'),
 	(106, 'KRISHPAR');
 
--- Volcando estructura para tabla sismarol.mes
+-- Volcando estructura para tabla mivavision.mes
 CREATE TABLE IF NOT EXISTS `mes` (
   `ID_MES` int(11) NOT NULL AUTO_INCREMENT,
   `MES` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID_MES`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.mes: ~12 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.mes: ~12 rows (aproximadamente)
 INSERT INTO `mes` (`ID_MES`, `MES`) VALUES
 	(1, 'ENERO'),
 	(2, 'FEBRERO'),
@@ -8892,7 +8892,7 @@ INSERT INTO `mes` (`ID_MES`, `MES`) VALUES
 	(11, 'NOVIEMBRE'),
 	(12, 'DICIEMBRE');
 
--- Volcando estructura para tabla sismarol.pedido
+-- Volcando estructura para tabla mivavision.pedido
 CREATE TABLE IF NOT EXISTS `pedido` (
   `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT,
   `CANTIDAD` int(11) NOT NULL,
@@ -8906,9 +8906,9 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   CONSTRAINT `Refsolicitud_compra46` FOREIGN KEY (`ID_SOLICITUD_COMPRA`) REFERENCES `solicitud_compra` (`ID_SOLICITUD_COMPRA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.pedido: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.pedido: ~0 rows (aproximadamente)
 
--- Volcando estructura para procedimiento sismarol.prc_kardex
+-- Volcando estructura para procedimiento mivavision.prc_kardex
 DELIMITER //
 CREATE PROCEDURE `prc_kardex`(IN `var_art` INT)
 BEGIN
@@ -9005,7 +9005,7 @@ DROP TABLE temp;
 END//
 DELIMITER ;
 
--- Volcando estructura para tabla sismarol.solicitud_baja
+-- Volcando estructura para tabla mivavision.solicitud_baja
 CREATE TABLE IF NOT EXISTS `solicitud_baja` (
   `ID_SOLICITUD_BAJA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -9016,9 +9016,9 @@ CREATE TABLE IF NOT EXISTS `solicitud_baja` (
   CONSTRAINT `Reftipo_venta51` FOREIGN KEY (`ID_TIPO_VENTA`) REFERENCES `tipo_venta` (`ID_TIPO_VENTA`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.solicitud_baja: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.solicitud_baja: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.solicitud_compra
+-- Volcando estructura para tabla mivavision.solicitud_compra
 CREATE TABLE IF NOT EXISTS `solicitud_compra` (
   `ID_SOLICITUD_COMPRA` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_SOLICITUD` date NOT NULL,
@@ -9027,9 +9027,9 @@ CREATE TABLE IF NOT EXISTS `solicitud_compra` (
   PRIMARY KEY (`ID_SOLICITUD_COMPRA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.solicitud_compra: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.solicitud_compra: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.solicitud_dev
+-- Volcando estructura para tabla mivavision.solicitud_dev
 CREATE TABLE IF NOT EXISTS `solicitud_dev` (
   `ID_SOLICITUD_DEV` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -9040,9 +9040,9 @@ CREATE TABLE IF NOT EXISTS `solicitud_dev` (
   CONSTRAINT `Reftipo_venta56` FOREIGN KEY (`ID_TIPO_VENTA`) REFERENCES `tipo_venta` (`ID_TIPO_VENTA`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.solicitud_dev: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.solicitud_dev: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.solicitud_venta
+-- Volcando estructura para tabla mivavision.solicitud_venta
 CREATE TABLE IF NOT EXISTS `solicitud_venta` (
   `ID_SOLICITUD_VENTA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -9055,7 +9055,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_venta` (
   CONSTRAINT `Reftipo_venta45` FOREIGN KEY (`ID_TIPO_VENTA`) REFERENCES `tipo_venta` (`ID_TIPO_VENTA`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2964 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.solicitud_venta: ~459 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.solicitud_venta: ~459 rows (aproximadamente)
 INSERT INTO `solicitud_venta` (`ID_SOLICITUD_VENTA`, `NRO_NOTA`, `FECHA_SOLICITUD`, `ID_CLIENTE`, `ID_TIPO_VENTA`) VALUES
 	(1, 1, '2024-05-31 14:42:40', 1, 'CNT'),
 	(2, 2, '2024-05-31 14:42:40', 1, 'CNT'),
@@ -12021,26 +12021,26 @@ INSERT INTO `solicitud_venta` (`ID_SOLICITUD_VENTA`, `NRO_NOTA`, `FECHA_SOLICITU
 	(2962, 2962, '2024-11-21 11:45:46', 1, 'CNT'),
 	(2963, 2963, '2024-11-21 13:31:36', 1, 'CNT');
 
--- Volcando estructura para tabla sismarol.tipo_cliente
+-- Volcando estructura para tabla mivavision.tipo_cliente
 CREATE TABLE IF NOT EXISTS `tipo_cliente` (
   `ID_TIPO_CLIENTE` varchar(10) NOT NULL,
   `TIPO` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_TIPO_CLIENTE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.tipo_cliente: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.tipo_cliente: ~2 rows (aproximadamente)
 INSERT INTO `tipo_cliente` (`ID_TIPO_CLIENTE`, `TIPO`) VALUES
 	('NS', 'NO SOCIO'),
 	('S', 'SOCIO');
 
--- Volcando estructura para tabla sismarol.tipo_usr
+-- Volcando estructura para tabla mivavision.tipo_usr
 CREATE TABLE IF NOT EXISTS `tipo_usr` (
   `ID_TIPO_USR` int(11) NOT NULL AUTO_INCREMENT,
   `TIPO_USR` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_TIPO_USR`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.tipo_usr: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.tipo_usr: ~5 rows (aproximadamente)
 INSERT INTO `tipo_usr` (`ID_TIPO_USR`, `TIPO_USR`) VALUES
 	(1, 'ADMINISTRADOR'),
 	(2, 'VENTAS'),
@@ -12048,14 +12048,14 @@ INSERT INTO `tipo_usr` (`ID_TIPO_USR`, `TIPO_USR`) VALUES
 	(4, 'CONTABILIDAD'),
 	(5, 'CONSUMO APL');
 
--- Volcando estructura para tabla sismarol.tipo_venta
+-- Volcando estructura para tabla mivavision.tipo_venta
 CREATE TABLE IF NOT EXISTS `tipo_venta` (
   `ID_TIPO_VENTA` varchar(10) NOT NULL,
   `TIPO` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_TIPO_VENTA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.tipo_venta: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.tipo_venta: ~6 rows (aproximadamente)
 INSERT INTO `tipo_venta` (`ID_TIPO_VENTA`, `TIPO`) VALUES
 	('BJA', 'BAJA'),
 	('CNT', 'CONTADO'),
@@ -12064,18 +12064,18 @@ INSERT INTO `tipo_venta` (`ID_TIPO_VENTA`, `TIPO`) VALUES
 	('DEV', 'DEVOLUCION'),
 	('QR', 'PAGO QR');
 
--- Volcando estructura para tabla sismarol.unidad
+-- Volcando estructura para tabla mivavision.unidad
 CREATE TABLE IF NOT EXISTS `unidad` (
   `ID_UNIDAD` varchar(10) NOT NULL,
   `UNIDAD` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_UNIDAD`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.unidad: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.unidad: ~0 rows (aproximadamente)
 INSERT INTO `unidad` (`ID_UNIDAD`, `UNIDAD`) VALUES
 	('UN', 'UNIDAD');
 
--- Volcando estructura para tabla sismarol.usr
+-- Volcando estructura para tabla mivavision.usr
 CREATE TABLE IF NOT EXISTS `usr` (
   `ID_USR` int(11) NOT NULL AUTO_INCREMENT,
   `USR` varchar(50) NOT NULL,
@@ -12086,7 +12086,7 @@ CREATE TABLE IF NOT EXISTS `usr` (
   CONSTRAINT `Reftipo_usr63` FOREIGN KEY (`ID_TIPO_USR`) REFERENCES `tipo_usr` (`ID_TIPO_USR`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.usr: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.usr: ~5 rows (aproximadamente)
 INSERT INTO `usr` (`ID_USR`, `USR`, `PSWR`, `ID_TIPO_USR`) VALUES
 	(1, 'JANNET', 'jannet', 2),
 	(2, 'CAJA', '123', 3),
@@ -12094,7 +12094,7 @@ INSERT INTO `usr` (`ID_USR`, `USR`, `PSWR`, `ID_TIPO_USR`) VALUES
 	(4, 'ADMIN', '123', 1),
 	(5, 'VALE', '123', 5);
 
--- Volcando estructura para tabla sismarol.vale
+-- Volcando estructura para tabla mivavision.vale
 CREATE TABLE IF NOT EXISTS `vale` (
   `ID_VALE` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -12114,9 +12114,9 @@ CREATE TABLE IF NOT EXISTS `vale` (
   CONSTRAINT `Refsolicitud_venta44` FOREIGN KEY (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) REFERENCES `solicitud_venta` (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.vale: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.vale: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.venta
+-- Volcando estructura para tabla mivavision.venta
 CREATE TABLE IF NOT EXISTS `venta` (
   `ID_VENTA` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -12137,7 +12137,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
   CONSTRAINT `Refsolicitud_venta21` FOREIGN KEY (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) REFERENCES `solicitud_venta` (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5455 DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.venta: ~721 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.venta: ~721 rows (aproximadamente)
 INSERT INTO `venta` (`ID_VENTA`, `PRECIO_COMPRA`, `PRECIO_VENTA`, `CANTIDAD`, `TOTAL`, `ID_SOLICITUD_VENTA`, `ID_CLIENTE`, `ID_ALMACEN`, `ID_COMPRA`, `ID_ARTICULO`, `CI_TACHO_CLIENTE`, `NOMBRE_CLIENTE`) VALUES
 	(1, 0, 1.5, 2, 3, 1, 1, 890, 890, 1355, '1234567', 'JOSE'),
 	(2, 0, 0.5, 2, 1, 1, 1, 653, 653, 985, '1234567', 'JOSE'),
@@ -16620,7 +16620,7 @@ INSERT INTO `venta` (`ID_VENTA`, `PRECIO_COMPRA`, `PRECIO_VENTA`, `CANTIDAD`, `T
 	(5453, 5, 6, 4, 24, 2962, 1, 554, 554, 824, '5290570', 'VENTAS AL CONTADO'),
 	(5454, 5, 5, 1, 5, 2963, 1, 1606, 1606, 210, '5290570', 'VENTAS AL CONTADO');
 
--- Volcando estructura para tabla sismarol.venta_aux
+-- Volcando estructura para tabla mivavision.venta_aux
 CREATE TABLE IF NOT EXISTS `venta_aux` (
   `ID_VENTA_AUX` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -16638,9 +16638,9 @@ CREATE TABLE IF NOT EXISTS `venta_aux` (
   PRIMARY KEY (`ID_VENTA_AUX`,`ID_CLIENTE`,`ID_ARTICULO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.venta_aux: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.venta_aux: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla sismarol.venta_credito
+-- Volcando estructura para tabla mivavision.venta_credito
 CREATE TABLE IF NOT EXISTS `venta_credito` (
   `ID_VENTA_CREDITO` int(11) NOT NULL,
   `PRECIO_COMPRA` double NOT NULL,
@@ -16660,9 +16660,9 @@ CREATE TABLE IF NOT EXISTS `venta_credito` (
   CONSTRAINT `Refsolicitud_venta49` FOREIGN KEY (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) REFERENCES `solicitud_venta` (`ID_SOLICITUD_VENTA`, `ID_CLIENTE`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla sismarol.venta_credito: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla mivavision.venta_credito: ~0 rows (aproximadamente)
 
--- Volcando estructura para disparador sismarol.TBitacoraInsert
+-- Volcando estructura para disparador mivavision.TBitacoraInsert
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TBitacoraInsert` AFTER INSERT ON `articulo` FOR EACH ROW BEGIN
@@ -16692,7 +16692,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Volcando estructura para disparador sismarol.TBitacoraUpdate
+-- Volcando estructura para disparador mivavision.TBitacoraUpdate
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TBitacoraUpdate` AFTER UPDATE ON `articulo` FOR EACH ROW BEGIN
@@ -16722,7 +16722,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Volcando estructura para disparador sismarol.TComprasInsert
+-- Volcando estructura para disparador mivavision.TComprasInsert
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TComprasInsert` AFTER INSERT ON `compra` FOR EACH ROW BEGIN

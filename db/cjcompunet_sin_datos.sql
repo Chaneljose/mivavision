@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para sismarol
+-- Volcando estructura de base de datos para mivavision
 CREATE DATABASE IF NOT EXISTS `cjcompunet` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `cjcompunet`;
 
--- Volcando estructura para tabla sismarol.almacen
+-- Volcando estructura para tabla mivavision.almacen
 CREATE TABLE IF NOT EXISTS `almacen` (
   `ID_ALMACEN` int(11) NOT NULL AUTO_INCREMENT,
   `ENTRADA` int(11) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `almacen` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.articulo
+-- Volcando estructura para tabla mivavision.articulo
 CREATE TABLE IF NOT EXISTS `articulo` (
   `ID_ARTICULO` int(11) NOT NULL AUTO_INCREMENT,
   `BARCODE` varchar(250) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `articulo` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.baja
+-- Volcando estructura para tabla mivavision.baja
 CREATE TABLE IF NOT EXISTS `baja` (
   `ID_BAJA` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `baja` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.bitacora_precio
+-- Volcando estructura para tabla mivavision.bitacora_precio
 CREATE TABLE IF NOT EXISTS `bitacora_precio` (
   `ID_BITACORA_PRECIO` int(11) NOT NULL AUTO_INCREMENT,
   `ID_ARTICULO` int(11) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `bitacora_precio` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.cliente
+-- Volcando estructura para tabla mivavision.cliente
 CREATE TABLE IF NOT EXISTS `cliente` (
   `ID_CLIENTE` int(11) NOT NULL AUTO_INCREMENT,
   `TACHO` int(11) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.cobro_credito
+-- Volcando estructura para tabla mivavision.cobro_credito
 CREATE TABLE IF NOT EXISTS `cobro_credito` (
   `ID_COBRO_CREDITO` varchar(10) NOT NULL,
   `TOTAL_VENTA` double NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `cobro_credito` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.compra
+-- Volcando estructura para tabla mivavision.compra
 CREATE TABLE IF NOT EXISTS `compra` (
   `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_FACTURA` int(11) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.deposito
+-- Volcando estructura para tabla mivavision.deposito
 CREATE TABLE IF NOT EXISTS `deposito` (
   `ID_DEPOSITO` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_DEPOSITO` date NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `deposito` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.devolucion
+-- Volcando estructura para tabla mivavision.devolucion
 CREATE TABLE IF NOT EXISTS `devolucion` (
   `ID_DEVOLUCION` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_DEVOLUCION` char(10) DEFAULT NULL,
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `devolucion` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.gestion
+-- Volcando estructura para tabla mivavision.gestion
 CREATE TABLE IF NOT EXISTS `gestion` (
   `ID_GESTION` int(11) NOT NULL,
   PRIMARY KEY (`ID_GESTION`)
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `gestion` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.grupo
+-- Volcando estructura para tabla mivavision.grupo
 CREATE TABLE IF NOT EXISTS `grupo` (
   `ID_GRUPO` varchar(10) NOT NULL,
   `GRUPO` varchar(50) NOT NULL,
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `grupo` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.kardex
+-- Volcando estructura para tabla mivavision.kardex
 CREATE TABLE IF NOT EXISTS `kardex` (
   `ID_KARDEX` int(11) NOT NULL,
   `FECHA_REGISTRO` datetime NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `kardex` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.marca
+-- Volcando estructura para tabla mivavision.marca
 CREATE TABLE IF NOT EXISTS `marca` (
   `ID_MARCA` int(11) NOT NULL AUTO_INCREMENT,
   `MARCA` varchar(50) NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `marca` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.mes
+-- Volcando estructura para tabla mivavision.mes
 CREATE TABLE IF NOT EXISTS `mes` (
   `ID_MES` int(11) NOT NULL AUTO_INCREMENT,
   `MES` varchar(50) DEFAULT NULL,
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `mes` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.pedido
+-- Volcando estructura para tabla mivavision.pedido
 CREATE TABLE IF NOT EXISTS `pedido` (
   `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT,
   `CANTIDAD` int(11) NOT NULL,
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `pedido` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para procedimiento sismarol.prc_kardex
+-- Volcando estructura para procedimiento mivavision.prc_kardex
 DELIMITER //
 CREATE PROCEDURE `prc_kardex`(IN `var_art` INT)
 BEGIN
@@ -365,7 +365,7 @@ DROP TABLE temp;
 END//
 DELIMITER ;
 
--- Volcando estructura para tabla sismarol.solicitud_baja
+-- Volcando estructura para tabla mivavision.solicitud_baja
 CREATE TABLE IF NOT EXISTS `solicitud_baja` (
   `ID_SOLICITUD_BAJA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_baja` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.solicitud_compra
+-- Volcando estructura para tabla mivavision.solicitud_compra
 CREATE TABLE IF NOT EXISTS `solicitud_compra` (
   `ID_SOLICITUD_COMPRA` int(11) NOT NULL AUTO_INCREMENT,
   `FECHA_SOLICITUD` date NOT NULL,
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_compra` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.solicitud_dev
+-- Volcando estructura para tabla mivavision.solicitud_dev
 CREATE TABLE IF NOT EXISTS `solicitud_dev` (
   `ID_SOLICITUD_DEV` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -402,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_dev` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.solicitud_venta
+-- Volcando estructura para tabla mivavision.solicitud_venta
 CREATE TABLE IF NOT EXISTS `solicitud_venta` (
   `ID_SOLICITUD_VENTA` int(11) NOT NULL AUTO_INCREMENT,
   `NRO_NOTA` int(11) DEFAULT NULL,
@@ -417,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_venta` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.tipo_cliente
+-- Volcando estructura para tabla mivavision.tipo_cliente
 CREATE TABLE IF NOT EXISTS `tipo_cliente` (
   `ID_TIPO_CLIENTE` varchar(10) NOT NULL,
   `TIPO` varchar(10) NOT NULL,
@@ -430,7 +430,7 @@ INSERT INTO `tipo_usr` (`ID_TIPO_USR`, `TIPO_USR`) VALUES
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.tipo_usr
+-- Volcando estructura para tabla mivavision.tipo_usr
 CREATE TABLE IF NOT EXISTS `tipo_usr` (
   `ID_TIPO_USR` int(11) NOT NULL AUTO_INCREMENT,
   `TIPO_USR` varchar(50) NOT NULL,
@@ -439,7 +439,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usr` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.tipo_venta
+-- Volcando estructura para tabla mivavision.tipo_venta
 CREATE TABLE IF NOT EXISTS `tipo_venta` (
   `ID_TIPO_VENTA` varchar(10) NOT NULL,
   `TIPO` varchar(10) NOT NULL,
@@ -452,7 +452,7 @@ INSERT INTO `tipo_venta` (`ID_TIPO_VENTA`, `TIPO`) VALUES
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.unidad
+-- Volcando estructura para tabla mivavision.unidad
 CREATE TABLE IF NOT EXISTS `unidad` (
   `ID_UNIDAD` varchar(10) NOT NULL,
   `UNIDAD` varchar(50) NOT NULL,
@@ -464,7 +464,7 @@ INSERT INTO `unidad` (`ID_UNIDAD`, `UNIDAD`) VALUES
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.usr
+-- Volcando estructura para tabla mivavision.usr
 CREATE TABLE IF NOT EXISTS `usr` (
   `ID_USR` int(11) NOT NULL AUTO_INCREMENT,
   `USR` varchar(50) NOT NULL,
@@ -481,7 +481,7 @@ INSERT INTO `usr` (`ID_USR`, `USR`, `PSWR`, `ID_TIPO_USR`) VALUES
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.vale
+-- Volcando estructura para tabla mivavision.vale
 CREATE TABLE IF NOT EXISTS `vale` (
   `ID_VALE` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -503,7 +503,7 @@ CREATE TABLE IF NOT EXISTS `vale` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.venta
+-- Volcando estructura para tabla mivavision.venta
 CREATE TABLE IF NOT EXISTS `venta` (
   `ID_VENTA` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -526,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `venta` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.venta_aux
+-- Volcando estructura para tabla mivavision.venta_aux
 CREATE TABLE IF NOT EXISTS `venta_aux` (
   `ID_VENTA_AUX` int(11) NOT NULL AUTO_INCREMENT,
   `PRECIO_COMPRA` double NOT NULL,
@@ -546,7 +546,7 @@ CREATE TABLE IF NOT EXISTS `venta_aux` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla sismarol.venta_credito
+-- Volcando estructura para tabla mivavision.venta_credito
 CREATE TABLE IF NOT EXISTS `venta_credito` (
   `ID_VENTA_CREDITO` int(11) NOT NULL,
   `PRECIO_COMPRA` double NOT NULL,
@@ -568,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `venta_credito` (
 
 -- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para disparador sismarol.TBitacoraInsert
+-- Volcando estructura para disparador mivavision.TBitacoraInsert
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TBitacoraInsert` AFTER INSERT ON `articulo` FOR EACH ROW BEGIN
@@ -598,7 +598,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Volcando estructura para disparador sismarol.TBitacoraUpdate
+-- Volcando estructura para disparador mivavision.TBitacoraUpdate
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TBitacoraUpdate` AFTER UPDATE ON `articulo` FOR EACH ROW BEGIN
@@ -628,7 +628,7 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Volcando estructura para disparador sismarol.TComprasInsert
+-- Volcando estructura para disparador mivavision.TComprasInsert
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `TComprasInsert` AFTER INSERT ON `compra` FOR EACH ROW BEGIN
