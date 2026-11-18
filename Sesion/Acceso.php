@@ -88,7 +88,7 @@ if ($var_usr == $usr && password_verify($pswr, $var_pswr)) {
 ?>
 	<script language=javascript>
 		alert("EL USUARIO O LA CLAVE SON INCORRECTOS, POR FAVOR INTENTELO DE NUEVO")
-		self.location = "../index.html"
+		self.location = "../"
 	</script>';
 <?PHP
 }

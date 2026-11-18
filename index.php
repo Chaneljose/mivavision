@@ -53,6 +53,14 @@ require_once('cnx/cnx_conexion.php');
         linear-gradient(90deg, rgba(30, 41, 3, .92) 0%, rgba(30, 41, 3, .75) 45%, rgba(30, 41, 3, .35) 100%);
     }
 
+    /* En móvil el texto va centrado: overlay vertical para mantener el contraste */
+    @media (max-width: 640px) {
+      .hero-overlay {
+        background:
+          linear-gradient(180deg, rgba(30, 41, 3, .70) 0%, rgba(30, 41, 3, .88) 55%, rgba(30, 41, 3, .75) 100%);
+      }
+    }
+
     .brand-glow {
       box-shadow: 0 10px 40px -10px rgba(159, 201, 8, .55);
     }
@@ -106,38 +114,42 @@ require_once('cnx/cnx_conexion.php');
 
   <!-- ===================== HERO / PORTADA ===================== -->
   <section id="inicio" class="relative min-h-screen flex items-center pt-16">
-    <!-- Imagen de portada -->
-    <img src="Iconos/portada_para_letrero_modificado_web.png" alt="MIVAVISION camaras de seguridad"
-      class="absolute inset-0 h-full w-full object-cover">
+    <!-- Imagen de portada: versión móvil (<= 640px) y versión escritorio -->
+    <picture class="absolute inset-0">
+      <source media="(max-width: 640px)" srcset="Iconos/portada_para_fondo_movil.png">
+      <img src="Iconos/portada_para_letrero_modificado_web.png" alt="MIVAVISION camaras de seguridad"
+        class="h-full w-full object-cover object-[50%_35%] sm:object-center"
+        fetchpriority="high" decoding="async">
+    </picture>
     <div class="absolute inset-0 hero-overlay"></div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-      <div class="max-w-2xl">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 w-full text-center sm:text-left">
+      <div class="max-w-2xl mx-auto sm:mx-0">
         <span class="inline-flex items-center gap-2 rounded-full bg-brand-400/15 border border-brand-400/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-300">
           <span class="h-2 w-2 rounded-full bg-brand-400 animate-pulse"></span>
           Videovigilancia profesional
         </span>
 
-        <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+        <h1 class="mt-4 sm:mt-6 text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
           Protege lo que mas te importa con
           <span class="text-brand-400">camaras de seguridad</span>
         </h1>
 
-        <p class="mt-6 text-lg text-slate-200 max-w-xl">
+        <p class="mt-4 sm:mt-6 text-base sm:text-lg text-slate-200 max-w-md sm:max-w-xl mx-auto sm:mx-0">
           Equipos Dahua, IMOU y TP-Link Tapo para tu hogar, negocio u oficina.
           Instalacion, configuracion y asesoria incluida de principio a fin.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-4">
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
           <a href="#productos"
-            class="inline-flex items-center gap-2 rounded-xl bg-brand-400 px-6 py-3.5 text-base font-semibold text-brand-950 hover:bg-brand-300 transition brand-glow">
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-400 px-6 py-3.5 text-base font-semibold text-brand-950 hover:bg-brand-300 transition brand-glow">
             Ver productos
             <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a href="#contacto"
-            class="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/5 px-6 py-3.5 text-base font-semibold text-white hover:bg-white/15 transition">
+            class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/5 px-6 py-3.5 text-base font-semibold text-white hover:bg-white/15 transition">
             Solicitar cotizacion
           </a>
         </div>
