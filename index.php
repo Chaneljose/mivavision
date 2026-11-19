@@ -355,7 +355,7 @@ require_once('cnx/cnx_conexion.php');
       </button>
 
       <h2 class="text-xl font-extrabold text-slate-900 text-center">Iniciar sesion</h2>
-      <p class="mt-1 text-sm text-slate-500 text-center">Accede a tu cuenta MIVAVISION</p>
+      <p class="mt-1 text-sm text-slate-500 text-center">Ingresa a tu cuenta MIVAVISION</p>
 
       <form class="mt-6 space-y-4" role="form" method="post" action="Sesion/Acceso.php">
         <div>
