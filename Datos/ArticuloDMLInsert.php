@@ -6,6 +6,7 @@ $grupo = $_REQUEST['ID_GRUPO'];
 $pcompra = 0;
 $pventa = $_REQUEST['VENTA'];
 $unidad = $_REQUEST['ID_UNIDAD'];
+$categoria = $_REQUEST['ID_CATEGORIA'];
 $descripcion = $_REQUEST['DESCRIPCION'];
 $artcode = $_REQUEST['ARTCODE'];
 $marca = '';
@@ -48,7 +49,8 @@ if (isset($_FILES['IMAGEN']) && $_FILES['IMAGEN']['error'] === UPLOAD_ERR_OK) {
 							  PRECIO_VENTA,
 							  ID_MARCA,
 							  ID_GRUPO,
-							  ID_UNIDAD)
+							  ID_UNIDAD,
+							  ID_CATEGORIA)
 				VALUES (
 						TRIM('$articulo'),
 						TRIM('$nombre_busqueda'),
@@ -60,7 +62,8 @@ if (isset($_FILES['IMAGEN']) && $_FILES['IMAGEN']['error'] === UPLOAD_ERR_OK) {
 						'$pventa',
 						'$id_marca',
 						'$grupo',
-						'$unidad')";
+						'$unidad',
+						'$categoria')";
 		$query = $connect->prepare($sql);
 		$query->execute();
 		header("Location:ArticuloTabla.php");

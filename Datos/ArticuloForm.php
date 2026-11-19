@@ -7,8 +7,10 @@ $sql = "SELECT ID_MARCA, MARCA
 	  FROM marca ORDER BY MARCA";
 $sql1 = "SELECT ID_GRUPO, GRUPO
 	  FROM grupo ORDER BY GRUPO";
-$sql2 = "SELECT ID_UNIDAD, UNIDAD
-	   FROM unidad ORDER BY UNIDAD";
+$sql2 = "SELECT ID_UNIDAD, NOMBRE
+	   FROM unidad ORDER BY NOMBRE";
+$sql3 = "SELECT ID_CATEGORIA, NOMBRE
+	   FROM categoria ORDER BY NOMBRE";
 $queryMarca = $connect->prepare($sql);
 $queryMarca->execute();
 $marcas = $queryMarca->fetchAll(PDO::FETCH_OBJ);
@@ -18,6 +20,9 @@ $grupos = $queryGrupo->fetchAll(PDO::FETCH_OBJ);
 $queryUnidad = $connect->prepare($sql2);
 $queryUnidad->execute();
 $unidades = $queryUnidad->fetchAll(PDO::FETCH_OBJ);
+$queryCategoria = $connect->prepare($sql3);
+$queryCategoria->execute();
+$categorias = $queryCategoria->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <div class="modal-header">
@@ -99,7 +104,28 @@ $unidades = $queryUnidad->fetchAll(PDO::FETCH_OBJ);
                 ?>
                         <option value="<?PHP echo $unidad->ID_UNIDAD; ?>">
                             <?PHP
-                            echo $unidad->UNIDAD;
+                            echo $unidad->NOMBRE;
+                            ?>
+                        </option>
+                <?PHP
+                    }
+                }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">CATEGORIA</label>
+        <div class="col-sm-7">
+            <select name="ID_CATEGORIA" required>
+                <option>---SELECCIONE UNA CATEGORIA---</option>
+                <?PHP
+                if ($queryCategoria->rowCount() > 0) {
+                    foreach ($categorias as $categoria) {
+                ?>
+                        <option value="<?PHP echo $categoria->ID_CATEGORIA; ?>">
+                            <?PHP
+                            echo $categoria->NOMBRE;
                             ?>
                         </option>
                 <?PHP
