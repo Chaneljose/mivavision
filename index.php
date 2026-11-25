@@ -410,6 +410,10 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
       </div>
       <div class="mt-10 border-t border-brand-800/50 pt-6 text-center text-sm text-slate-400">
         &copy; MIVAVISION - Camaras de seguridad y videovigilancia
+        <br>
+        Todos los derechos reservados 2026
+        <br>
+         Cochabamba - Bolivia
       </div>
     </div>
   </footer>
