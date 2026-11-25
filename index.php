@@ -22,9 +22,22 @@ function categoriaProducto($nombre)
 
 $imagenPorDefecto = 'data:image/svg+xml;charset=utf-8,' . rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 90"><rect width="120" height="90" fill="#f1f5f9"/><text x="60" y="52" text-anchor="middle" font-size="12" fill="#94a3b8">Sin imagen</text></svg>');
 
-$sqlProductos = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, COALESCE(s.SALDO, 0) AS SALDO
+// Categorías desde la base de datos para el filtro
+try {
+  $filasCategorias = $connect->query("SELECT NOMBRE FROM categoria ORDER BY NOMBRE", PDO::FETCH_ASSOC)->fetchAll();
+} catch (PDOException $e) {
+  $filasCategorias = array();
+}
+$categoriasFiltro = array();
+foreach ($filasCategorias as $filaCat) {
+  $nombreCat = trim((string)$filaCat['NOMBRE']);
+  if ($nombreCat !== '') $categoriasFiltro[] = $nombreCat;
+}
+
+$sqlProductos = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, c.NOMBRE AS CATEGORIA, COALESCE(s.SALDO, 0) AS SALDO
   FROM articulo a
   INNER JOIN marca m ON m.ID_MARCA = a.ID_MARCA
+  LEFT JOIN categoria c ON c.ID_CATEGORIA = a.ID_CATEGORIA
   LEFT JOIN stock s ON s.ID_ARTICULO = a.ID_ARTICULO
   WHERE a.ID_GRUPO = 'PROD'
   ORDER BY m.MARCA, a.ARTICULO";
@@ -33,9 +46,10 @@ try {
   $filasProductos = $connect->query($sqlProductos, PDO::FETCH_ASSOC)->fetchAll();
 } catch (PDOException $e) {
   // Si la vista stock no esta disponible, mostramos los productos sin stock
-  $sqlSinStock = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, 0 AS SALDO
+  $sqlSinStock = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, c.NOMBRE AS CATEGORIA, 0 AS SALDO
     FROM articulo a
     INNER JOIN marca m ON m.ID_MARCA = a.ID_MARCA
+    LEFT JOIN categoria c ON c.ID_CATEGORIA = a.ID_CATEGORIA
     WHERE a.ID_GRUPO = 'PROD'
     ORDER BY m.MARCA, a.ARTICULO";
   $filasProductos = $connect->query($sqlSinStock, PDO::FETCH_ASSOC)->fetchAll();
@@ -56,11 +70,14 @@ foreach ($filasProductos as $fila) {
   $marca = strtoupper(trim($fila['MARCA']));
   if ($marca === 'TAPO' || $marca === 'TP-LINK') $marca = 'TP-Link Tapo';
 
+  $categoria = trim((string)($fila['CATEGORIA'] ?? ''));
+  if ($categoria === '') $categoria = categoriaProducto($nombre);
+
   $saldo = (float)$fila['SALDO'];
   $productos[] = array(
     'nombre' => $nombre,
     'marca' => $marca,
-    'categoria' => categoriaProducto($nombre),
+    'categoria' => $categoria,
     'stock' => $saldo > 0 ? 'Disponible' : 'Agotado',
     'cantidad' => $saldo,
     'precio' => (float)$fila['PRECIO_VENTA'],
@@ -70,7 +87,18 @@ foreach ($filasProductos as $fila) {
   );
 }
 
+if (empty($categoriasFiltro)) {
+  $categoriasDesdeProductos = array();
+  foreach ($productos as $p) {
+    $cat = trim((string)$p['categoria']);
+    if ($cat !== '' && !in_array($cat, $categoriasDesdeProductos, true)) $categoriasDesdeProductos[] = $cat;
+  }
+  sort($categoriasDesdeProductos);
+  $categoriasFiltro = $categoriasDesdeProductos;
+}
+
 $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+$categoriasJSON = json_encode($categoriasFiltro, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -477,9 +505,10 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
     const elVacio = document.getElementById('productos-vacio');
     const elContador = document.getElementById('productos-contador');
     const elPaginacion = document.getElementById('productos-paginacion');
+    const CATEGORIAS_DB = <?php echo $categoriasJSON; ?>;
     const MARCAS = ['Todas'].concat(Array.from(new Set(PRODUCTOS.map(p => p.marca))));
-    const CATEGORIAS = ['Todas'].concat(Array.from(new Set(PRODUCTOS.map(p => p.categoria))).sort(function(a, b) {
-      return a.localeCompare(b, 'es');
+    const CATEGORIAS = ['Todas'].concat(CATEGORIAS_DB.filter(function(c) {
+      return typeof c === 'string' && c.trim() !== '';
     }));
     elFiltroCategoria.innerHTML = CATEGORIAS.map(function(c) {
       return '<option value="' + c + '">' + c + '</option>';
