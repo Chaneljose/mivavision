@@ -56,11 +56,13 @@ foreach ($filasProductos as $fila) {
   $marca = strtoupper(trim($fila['MARCA']));
   if ($marca === 'TAPO' || $marca === 'TP-LINK') $marca = 'TP-Link Tapo';
 
+  $saldo = (float)$fila['SALDO'];
   $productos[] = array(
     'nombre' => $nombre,
     'marca' => $marca,
     'categoria' => categoriaProducto($nombre),
-    'stock' => ((float)$fila['SALDO'] > 0) ? 'Disponible' : 'Agotado',
+    'stock' => $saldo > 0 ? 'Disponible' : 'Agotado',
+    'cantidad' => $saldo,
     'precio' => (float)$fila['PRECIO_VENTA'],
     'img' => $imagen,
     'alt' => $nombre,
@@ -508,9 +510,10 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
     }
 
     function tarjeta(p) {
-      var stockClases = p.stock === 'Disponible' ?
+      var stockClases = p.cantidad > 0 ?
         'bg-emerald-50 text-emerald-700' :
         'bg-red-50 text-red-700';
+      var cantidadTexto = Number.isInteger(p.cantidad) ? String(p.cantidad) : p.cantidad.toFixed(2);
       return '<article class="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">' +
         '<div class="aspect-[4/3] bg-slate-50 overflow-hidden">' +
         '<img src="' + p.img + '" alt="' + p.alt + '" loading="lazy" class="h-full w-full object-contain p-6 group-hover:scale-105 transition duration-300">' +
@@ -519,7 +522,7 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
         '<div class="flex flex-wrap items-center gap-2">' +
         '<span class="inline-block rounded-full bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">' + p.marca + '</span>' +
         '<span class="inline-block rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">' + p.categoria + '</span>' +
-        '<span class="inline-block rounded-full px-2.5 py-1 text-xs font-semibold ' + stockClases + '">' + p.stock + '</span>' +
+        '<span class="inline-block rounded-full px-2.5 py-1 text-xs font-semibold ' + stockClases + '">Stock: ' + cantidadTexto + '</span>' +
         '</div>' +
         '<h3 class="mt-3 font-bold text-slate-900 text-lg">' + p.nombre + '</h3>' +
         '<p class="mt-2 text-sm text-slate-500">' + p.desc + '</p>' +
