@@ -58,11 +58,11 @@ $sql1 = "SELECT ID_GRUPO, GRUPO
 $queryGrupo = $connect->prepare($sql1);
 $queryGrupo->execute();
 $grupos = $queryGrupo->fetchAll(PDO::FETCH_OBJ);
-$sql2 = "SELECT ID_UNIDAD, UNIDAD
+$sql2 = "SELECT ID_UNIDAD, NOMBRE AS UNIDAD
 	   FROM unidad
 	   WHERE ID_UNIDAD = '$id_unidad'
 	   UNION ALL
-	   SELECT ID_UNIDAD, UNIDAD
+	   SELECT ID_UNIDAD, NOMBRE AS UNIDAD
 	   FROM unidad";
 $queryUnidad = $connect->prepare($sql2);
 $queryUnidad->execute();

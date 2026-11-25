@@ -461,7 +461,7 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
   <script>
     // Datos de los productos (obtenidos desde la base de datos en PHP)
     const PRODUCTOS = <?php echo $productosJSON; ?>;
-    const POR_PAGINA = 6;
+    const POR_PAGINA = 10;
     const estado = {
       marca: 'Todas',
       categoria: 'Todas',
@@ -532,7 +532,7 @@ $productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED
         '<p class="mt-2 text-sm text-slate-500">' + p.desc + '</p>' +
         '<div class="mt-4 flex items-center justify-between">' +
         '<p class="text-xl font-extrabold text-brand-600">' + p.precio.toFixed(2) + ' <span class="text-xs font-medium text-slate-400">Bs.</span></p>' +
-        '<a href="Sesion/Acceso.php" class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 transition">Comprar</a>' +
+        '<a href="Sesion/Acceso.php" class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 transition">Cotizar</a>' +
         '</div>' +
         '</div>' +
         '</article>';
