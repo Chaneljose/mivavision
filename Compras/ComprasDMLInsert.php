@@ -1,7 +1,7 @@
 <?PHP
 require_once('../cnx/cnx_compras.php');
 include_once('../Funciones/Funciones.php');
-//session_start();
+session_start();
 $var_tipo = '';
 $var_active = "compras";
 $nro_factura = $_REQUEST['FACTURA'];

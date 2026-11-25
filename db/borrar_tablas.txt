@@ -28,3 +28,4 @@ drop table usr;
 drop table tipo_usr;
 drop table tipo_venta;
 drop table unidad;
+drop table categoria;

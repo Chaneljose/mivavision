@@ -1,5 +1,74 @@
 <?php
 require_once('cnx/cnx_conexion.php');
+
+/*
+ * Catalogo: los productos se leen de la base de datos (articulo + marca + stock).
+ * El array se inyecta mas abajo en la variable JavaScript PRODUCTOS.
+ */
+$connect->exec("SET NAMES utf8mb4"); // La BD guarda latin1; convertimos a UTF-8 para json_encode
+
+function categoriaProducto($nombre)
+{
+  $n = strtoupper(str_replace(
+    array('á', 'é', 'í', 'ó', 'ú', 'ñ'),
+    array('a', 'e', 'i', 'o', 'u', 'n'),
+    $nombre
+  ));
+  if (strpos($n, 'CAMARA') !== false) return 'Cámaras';
+  if (strpos($n, 'GRABADOR') !== false || strpos($n, 'XVR') !== false || strpos($n, 'DVR') !== false || strpos($n, 'NVR') !== false) return 'Grabadores';
+  if (strpos($n, 'DISCO DURO') !== false || strpos($n, 'MEMORIA') !== false || strpos($n, 'MICRO SD') !== false) return 'Almacenamiento';
+  return 'Accesorios';
+}
+
+$imagenPorDefecto = 'data:image/svg+xml;charset=utf-8,' . rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 90"><rect width="120" height="90" fill="#f1f5f9"/><text x="60" y="52" text-anchor="middle" font-size="12" fill="#94a3b8">Sin imagen</text></svg>');
+
+$sqlProductos = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, COALESCE(s.SALDO, 0) AS SALDO
+  FROM articulo a
+  INNER JOIN marca m ON m.ID_MARCA = a.ID_MARCA
+  LEFT JOIN stock s ON s.ID_ARTICULO = a.ID_ARTICULO
+  WHERE a.ID_GRUPO = 'PROD'
+  ORDER BY m.MARCA, a.ARTICULO";
+
+try {
+  $filasProductos = $connect->query($sqlProductos, PDO::FETCH_ASSOC)->fetchAll();
+} catch (PDOException $e) {
+  // Si la vista stock no esta disponible, mostramos los productos sin stock
+  $sqlSinStock = "SELECT a.ARTICULO, a.NOMBRE_BUSQUEDA, a.DESCRIPCION, a.PRECIO_VENTA, a.IMAGEN, m.MARCA, 0 AS SALDO
+    FROM articulo a
+    INNER JOIN marca m ON m.ID_MARCA = a.ID_MARCA
+    WHERE a.ID_GRUPO = 'PROD'
+    ORDER BY m.MARCA, a.ARTICULO";
+  $filasProductos = $connect->query($sqlSinStock, PDO::FETCH_ASSOC)->fetchAll();
+}
+
+$productos = array();
+foreach ($filasProductos as $fila) {
+  $nombre = trim($fila['ARTICULO']);
+  $descripcion = trim($fila['DESCRIPCION']);
+  if ($descripcion === '') $descripcion = trim($fila['NOMBRE_BUSQUEDA']);
+  $descripcion = preg_replace('/\s*\*\s*/', ' ', $descripcion);
+  $descripcion = preg_replace('/\s+/', ' ', $descripcion);
+
+  $imagen = trim((string)$fila['IMAGEN']);
+  // En la BD las rutas son ../imagenes/... (para el panel); desde la raiz del sitio se quita el ../
+  $imagen = $imagen === '' ? $imagenPorDefecto : str_replace(' ', '%20', preg_replace('#^\.\./#', '', $imagen));
+
+  $marca = strtoupper(trim($fila['MARCA']));
+  if ($marca === 'TAPO' || $marca === 'TP-LINK') $marca = 'TP-Link Tapo';
+
+  $productos[] = array(
+    'nombre' => $nombre,
+    'marca' => $marca,
+    'categoria' => categoriaProducto($nombre),
+    'stock' => ((float)$fila['SALDO'] > 0) ? 'Disponible' : 'Agotado',
+    'precio' => (float)$fila['PRECIO_VENTA'],
+    'img' => $imagen,
+    'alt' => $nombre,
+    'desc' => $descripcion
+  );
+}
+
+$productosJSON = json_encode($productos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -382,100 +451,10 @@ require_once('cnx/cnx_conexion.php');
       </form>
     </div>
   </div>
-  <!-- ===================== PRODUCTOS: filtros, orden y paginacion ===================== -->
+  <!-- ===================== PRODUCTOS: filtros, orden y paginacion para revisar ===================== -->
   <script>
-    // Datos de los productos
-    const PRODUCTOS = [{
-        nombre: 'Tapo C210',
-        marca: 'TP-Link Tapo',
-        categoria: 'Cámaras',
-        stock: 'Disponible',
-        precio: 29.99,
-        img: 'imagenes/imagen_TAPO%20C210.png',
-        alt: 'Camara WiFi Tapo C210',
-        desc: 'Camara WiFi interior 360 grados, 3 MP, vision nocturna y audio bidireccional.'
-      },
-      {
-        nombre: 'Tapo C310',
-        marca: 'TP-Link Tapo',
-        categoria: 'Cámaras',
-        stock: 'Disponible',
-        precio: 44.99,
-        img: 'imagenes/imagen_TAPO%20C310.png',
-        alt: 'Camara WiFi Tapo C310',
-        desc: 'Camara WiFi exterior 3 MP, resistente al agua, vision nocturna y deteccion de movimiento.'
-      },
-      {
-        nombre: 'IMOU IPC-K7FN',
-        marca: 'IMOU',
-        categoria: 'Cámaras',
-        stock: 'Disponible',
-        precio: 39.99,
-        img: 'imagenes/imagen_IPC-K7FN-3H0WE-IMOU.png',
-        alt: 'Camara WiFi IMOU IPC-K7FN',
-        desc: 'Camara WiFi interior 3 MP con seguimiento inteligente y comunicacion de dos vias.'
-      },
-      {
-        nombre: 'Dahua HAC-B1A21N',
-        marca: 'Dahua',
-        categoria: 'Cámaras',
-        stock: 'Disponible',
-        precio: 34.99,
-        img: 'imagenes/imagen_DH-HAC-B1A21N-U-0280B.png',
-        alt: 'Camara HDCVI Dahua B1A21N',
-        desc: 'Camara tipo bala HDCVI 2 MP, lente 2.8 mm, ideal para exteriores con DVR.'
-      },
-      {
-        nombre: 'Dahua IPC-H5AP',
-        marca: 'Dahua',
-        categoria: 'Cámaras',
-        stock: 'Agotado',
-        precio: 89.99,
-        img: 'imagenes/imagen_DH-IPC-H5AP-0360B.png',
-        alt: 'Camara IP Dahua IPC-H5AP',
-        desc: 'Camara IP tipo domo 5 MP, lente 3.6 mm, alta definicion para interiores y comercios.'
-      },
-      {
-        nombre: 'Dahua XVR5108HS-I3',
-        marca: 'Dahua',
-        categoria: 'Grabadores',
-        stock: 'Disponible',
-        precio: 149.99,
-        img: 'imagenes/imagen_DH-XVR5108HS-I3(V3.0).png',
-        alt: 'DVR Dahua XVR5108HS-I3',
-        desc: 'Grabador DVR de 8 canales, soporta HDCVI, AHD, TVI, CVBS e IP, acceso remoto.'
-      },
-      {
-        nombre: 'Dahua PFM800-E',
-        marca: 'Dahua',
-        categoria: 'Accesorios',
-        stock: 'Disponible',
-        precio: 14.99,
-        img: 'imagenes/imagen_DH-PFM800-E.png',
-        alt: 'Fuente de poder Dahua PFM800-E',
-        desc: 'Fuente de poder para camaras y equipos de videovigilancia, instalacion sencilla.'
-      },
-      {
-        nombre: 'WD Purple 1 TB',
-        marca: 'Western Digital',
-        categoria: 'Almacenamiento',
-        stock: 'Agotado',
-        precio: 59.99,
-        img: 'imagenes/imagen_WD11PURZ.png',
-        alt: 'Disco duro Western Digital Purple 1TB',
-        desc: 'Disco duro para videovigilancia, optimizado para grabacion continua 24/7.'
-      },
-      {
-        nombre: 'Memoria 64 GB',
-        marca: 'Dahua',
-        categoria: 'Almacenamiento',
-        stock: 'Disponible',
-        precio: 12.99,
-        img: 'imagenes/imagen_DHI-TF-C100-64GB.png',
-        alt: 'Memoria microSD Dahua 64GB',
-        desc: 'Tarjeta microSD clase 10 para camaras WiFi, grabacion local de video.'
-      }
-    ];
+    // Datos de los productos (obtenidos desde la base de datos en PHP)
+    const PRODUCTOS = <?php echo $productosJSON; ?>;
     const POR_PAGINA = 6;
     const estado = {
       marca: 'Todas',
@@ -545,7 +524,7 @@ require_once('cnx/cnx_conexion.php');
         '<h3 class="mt-3 font-bold text-slate-900 text-lg">' + p.nombre + '</h3>' +
         '<p class="mt-2 text-sm text-slate-500">' + p.desc + '</p>' +
         '<div class="mt-4 flex items-center justify-between">' +
-        '<p class="text-xl font-extrabold text-brand-600">$' + p.precio.toFixed(2) + ' <span class="text-xs font-medium text-slate-400">USD</span></p>' +
+        '<p class="text-xl font-extrabold text-brand-600">' + p.precio.toFixed(2) + ' <span class="text-xs font-medium text-slate-400">Bs.</span></p>' +
         '<a href="Sesion/Acceso.php" class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 transition">Comprar</a>' +
         '</div>' +
         '</div>' +

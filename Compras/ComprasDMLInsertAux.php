@@ -1,7 +1,7 @@
 <?PHP 
 require_once('../cnx/cnx_compras.php');
 include_once('../Funciones/funciones.php');
-//session_start();
+session_start();
 $id_cliente = $_REQUEST['ID_CLIENTE'];
 $id_articulo = (int)$_REQUEST['ARTICULO'];
 $var_usuario = $_SESSION['SES_ID'];
