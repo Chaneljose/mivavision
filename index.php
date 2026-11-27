@@ -263,9 +263,12 @@ $mensajeWhatsapp = 'Hola, quisiera cotizar un sistema de videovigilancia.';
         fetchpriority="high" decoding="async">
     </picture>
     <div class="absolute inset-0 hero-overlay"></div>
-
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 w-full text-center sm:text-left">
-      <div class="max-w-2xl mx-auto sm:mx-0">
+      <div class="max-w-4xl mx-auto sm:mx-0">
+        <br>
+        <br>
+        <br>
+        <br>
         <span class="inline-flex items-center gap-2 rounded-full bg-brand-400/15 border border-brand-400/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-300">
           <span class="h-2 w-2 rounded-full bg-brand-400 animate-pulse"></span>
           Videovigilancia profesional
@@ -283,7 +286,7 @@ $mensajeWhatsapp = 'Hola, quisiera cotizar un sistema de videovigilancia.';
         <br>
         <span class="inline-flex items-center gap-2 rounded-full bg-brand-400/15 border border-brand-400/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-300">
           <span class="h-2 w-2 rounded-full bg-brand-400 animate-pulse"></span>
-          Ventas al por mayor y al por menor, descuentos del 10% para instaladores.
+          Ventas al por mayor y al por menor, descuentos del 10% para tecnicos instaladores y tiendas.
         </span>
 
         <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
