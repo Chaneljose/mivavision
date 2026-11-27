@@ -280,6 +280,11 @@ $mensajeWhatsapp = 'Hola, quisiera cotizar un sistema de videovigilancia.';
           Equipos Dahua, IMOU y TP-Link Tapo para tu hogar, negocio u oficina.
           Instalacion, configuracion y asesoria incluida de principio a fin.
         </p>
+        <br>
+        <span class="inline-flex items-center gap-2 rounded-full bg-brand-400/15 border border-brand-400/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-300">
+          <span class="h-2 w-2 rounded-full bg-brand-400 animate-pulse"></span>
+          Ventas al por mayor y al por menor, descuentos del 10% para instaladores.
+        </span>
 
         <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
           <a href="#productos"
@@ -314,9 +319,11 @@ $mensajeWhatsapp = 'Hola, quisiera cotizar un sistema de videovigilancia.';
   <!-- ===================== PRODUCTOS ===================== -->
   <section id="productos" class="py-20 bg-slate-50 scroll-mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto">
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Nuestros productos</h2>
         <p class="mt-4 text-slate-500">Camaras, grabadores y accesorios de videovigilancia seleccionados para cada necesidad.</p>
+        <!--<p class="mt-4 text-slate-500">Ventas al por mayor y al por menor, descuentos del 10% para instaladores y tiendas.</p>-->
+        <!--<span class="inline-block rounded-full bg-slate-100 px-2.5 py-1 text-lg font-semibold text-slate-600">Ventas al por mayor y al por menor, descuentos del 10% para instaladores y tiendas.</span>-->
       </div>
 
       <!-- Filtros: marca, categoria, stock y orden -->
